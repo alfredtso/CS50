@@ -2,21 +2,41 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
 #include "bmp.h"
 
 int main(int argc, char *argv[])
 {
     // ensure proper usage
-    if (argc != 3)
+    if (argc != 4)
     {
-        fprintf(stderr, "Usage: copy infile outfile\n");
+        fprintf(stderr, "Usage: float copy infile outfile\n");
         return 1;
     }
+	//assign each variable one by one
+	char *size=argv[1];
+	char *infile=argv[2];
+	char *outfile=argv[3];
+	
+	//alternative implementation
+	//char *size=NULL;
+	//char *infile=NULL;
+	//char *outfile=NULL;
+	//sscanf(*argv, "%s %s %s", size, infile, outfile);
+	
+	// To check if the value is correct for each of the var
+	printf("%s, %s, %s", size, infile, outfile);
+	
+	//change the type
+    double ratio = atof(size);
+	printf("%f", ratio);  //to check if the value is correct 
 
-    // remember filenames
-    char *infile = argv[1];
-    char *outfile = argv[2];
+	//check for float value
+	if ( ratio < 0 || ratio > 100 )
+	{
+		fprintf(stderr, "f must be floating-point value in (0.0, 100.0]\n");
+		return 2
+	}
+	
 
     // open input file
     FILE *inptr = fopen(infile, "r");
